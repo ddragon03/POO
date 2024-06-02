@@ -2,17 +2,17 @@ package paciente.model;
 
 import java.util.List;
 
-import common.model.IGestorCrud;
+import common.model.IGestorCRUD;
 import common.util.FileUtil;
 
-public class GestorCrudFilePCon implements IGestorCrud{
-	private List<Paciente> list;
+public class GestorCrudFilePCon implements IGestorCRUD{
+	private List<PacienteCon> list;
 	private String path;
 	/**
 	 * @param listPaciente
 	 * @param path
 	 */
-	public GestorCrudFilePCon(List<Paciente> listPaciente, String path) {
+	public GestorCrudFilePCon(List<PacienteCon> listPaciente, String path) {
 		super();
 		this.list = listPaciente;
 		this.path = path;

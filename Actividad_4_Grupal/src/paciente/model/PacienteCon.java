@@ -1,10 +1,10 @@
 package paciente.model;
 
-import paciente.model.Cita;
-import java.util.List;
+import java.io.Serializable;
 
-public class PacienteCon extends Paciente {
+public class PacienteCon extends Paciente implements Serializable{
  
+	private static final long serialVersionUID = 1L;
 	private Cita cita;
 
 	/**
@@ -38,8 +38,5 @@ public class PacienteCon extends Paciente {
 	public String toString() {
 		return "[citas=" + cita + "]";
 	}
-
-	
-	
 
 }

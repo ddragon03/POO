@@ -1,8 +1,9 @@
 package paciente.model;
 
-import java.util.List;
+import java.io.Serializable;
 
-public class Paciente {
+public class Paciente implements Serializable {
+	private static final long serialVersionUID = 1L;
 	protected String nombre;
 	private int edad;
 	protected String genero;

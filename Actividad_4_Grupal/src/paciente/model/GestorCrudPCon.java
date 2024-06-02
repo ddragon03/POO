@@ -2,14 +2,15 @@ package paciente.model;
 
 import java.util.List;
 
-import common.model.IGestorCrud;
+import common.model.IGestorCRUD;
 
-public class GestorCrudPCon implements IGestorCrud{
-	private List<Paciente> list;
+public class GestorCrudPCon implements IGestorCRUD{
+	
+	private List<PacienteCon> list;
 	/**
 	 * @param Element List de sintoma
 	 */
-	public GestorCrudPCon(List<Paciente> listPaciente) {
+	public GestorCrudPCon(List<PacienteCon> listPaciente) {
 		this.list = listPaciente;	
 	}
 	/**
@@ -17,7 +18,7 @@ public class GestorCrudPCon implements IGestorCrud{
 	 * @param 
 	 */
 	public void create(Object elemento) {
-			list.add((PacienteCon)elemento);
+		list.add((PacienteCon)elemento);
 	}
 	/**
 	 * actualiza
@@ -35,9 +36,9 @@ public class GestorCrudPCon implements IGestorCrud{
 	public boolean update(int pos, Object e) {
 		boolean bRet=false;
 		if (pos>=0 && pos<list.size()) {
-				list.set(pos, (PacienteCon)e);
-				bRet=true;
-			}
+			list.set(pos, (PacienteCon)e);
+			bRet=true;
+		}
 		return bRet;
 	}
 	/**
@@ -47,9 +48,9 @@ public class GestorCrudPCon implements IGestorCrud{
 	 */
 	public boolean delete(int pos) {
 		boolean bRet=false;
-			if (pos>=0 && pos<list.size()) {
-				list.remove(pos);
-				bRet=true;
+		if (pos>=0 && pos<list.size()) {
+			list.remove(pos);
+			bRet=true;
 		}
 		return bRet;
 	}
