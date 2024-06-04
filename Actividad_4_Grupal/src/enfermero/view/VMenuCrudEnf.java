@@ -1,6 +1,8 @@
 package enfermero.view;
 
 import common.model.IGestorCrud;
+import enfermero.model.GestorEnf;
+
 import java.util.Scanner;
 
 public class VMenuCrudEnf {

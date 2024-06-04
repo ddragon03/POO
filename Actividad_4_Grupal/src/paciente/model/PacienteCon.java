@@ -36,7 +36,9 @@ public class PacienteCon extends Paciente implements Serializable{
 
 	@Override
 	public String toString() {
-		return "[citas=" + cita + "]";
+		return "PacienteCon [cita=" + cita + ", nombre=" + nombre + ", genero=" + genero + ", dni=" + dni + "]";
 	}
+
+	
 
 }

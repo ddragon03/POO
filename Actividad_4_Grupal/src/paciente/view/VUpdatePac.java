@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-import common.model.IGestorCRUD;
+import common.model.IGestorCrud;
 import doctor.model.Doctor;
 import paciente.model.Cita;
 import paciente.model.Paciente;
@@ -13,13 +13,13 @@ import paciente.model.PacienteCon;
 public class VUpdatePac {
 	
 	private Scanner sc;
-	private IGestorCRUD gcPac;
-	private IGestorCRUD gcDoc;
+	private IGestorCrud gcPac;
+	private IGestorCrud gcDoc;
 
 	/**
 	 * @param gc
 	 */
-	public VUpdatePac(IGestorCRUD gcDoc, IGestorCRUD gcPac) {
+	public VUpdatePac(IGestorCrud gcDoc, IGestorCrud gcPac) {
 		this.sc = new Scanner(System.in);
 		this.gcPac = gcPac;
 		this.gcDoc = gcDoc;
@@ -65,7 +65,7 @@ public class VUpdatePac {
 			System.out.println(doctores);
 			int pos1 = sc.nextInt();
 			Paciente p = new PacienteCon(nombre, edad, genero, dni,c);
-			doctores.get(pos1).addPaciente(p);
+			doctores.get(pos1).addPacientes(p);
 			bRet=gcPac.update(pos,p);
 		} catch (Exception e) {
 			System.out.println("Error en update");

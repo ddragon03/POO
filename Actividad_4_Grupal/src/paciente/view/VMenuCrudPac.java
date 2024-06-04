@@ -2,14 +2,15 @@ package paciente.view;
 
 import java.util.Scanner;
 
-import common.model.IGestorCRUD;
+import common.model.IGestorCrud;
+import paciente.model.GestorCrudPCon;
 
 public class VMenuCrudPac {
-	IGestorCRUD gestorPac;
-	IGestorCRUD gestorDoc;
+	IGestorCrud gestorPac;
+	IGestorCrud gestorDoc;
 	private Scanner sc;
 	
-	public VMenuCrudPac(IGestorCRUD gestorDoc, IGestorCRUD gestorPac) {
+	public VMenuCrudPac(IGestorCrud gestorDoc, IGestorCrud gestorPac) {
 		this.gestorDoc=gestorDoc;
 		this.gestorPac=gestorPac;
 		this.sc = new Scanner(System.in);

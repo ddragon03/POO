@@ -2,10 +2,10 @@ package paciente.model;
 
 import java.util.List;
 
-import common.model.IGestorCRUD;
+import common.model.IGestorCrud;
 import common.util.FileUtil;
 
-public class GestorCrudFilePCon implements IGestorCRUD{
+public class GestorCrudFilePCon implements IGestorCrud{
 	private List<PacienteCon> list;
 	private String path;
 	/**

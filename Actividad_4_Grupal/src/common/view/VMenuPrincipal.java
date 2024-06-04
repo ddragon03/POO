@@ -11,6 +11,8 @@ import doctor.model.GestorDoctor;
 import doctor.view.VMenuCrudMedico;
 import enfermedad.model.GestorCrudFileEnfermGrave;
 import enfermedad.model.Enfermedad;
+import enfermedad.model.GestorCrudEnfermGrave;
+import enfermedad.model.GestorCrudEnfermLeve;
 import enfermedad.view.VMenuPrincipalEnfermGrave;
 import enfermedad.view.VMenuPrincipalEnfermLeve;
 import enfermero.model.Enfermero;
@@ -20,9 +22,9 @@ import medicamento.model.GestorCrudMed;
 import medicamento.model.Medicamento;
 import medicamento.view.VMenuPrincipalMed;
 import paciente.model.GestorCrudPCon;
-import paciente.model.Paciente;
-import paciente.view.VMenuPrincipalPCon;
-import paciente.view.VMenuPrincipalPSin;
+import paciente.model.PacienteCon;
+import paciente.view.VMenuCrudPac;
+
 
 /**
  * Muestra menu principal
@@ -33,24 +35,24 @@ public class VMenuPrincipal {
 	private final static String pathEnferm="data\\enfermedad\\enfermedad.dat";
 	private final static String pathDoc="data\\doctor\\doctor.dat";
 	private final static String pathEnf="data\\enfermero\\enfermero.dat";
-	private final static String pathPa="data\\paciente\\paciente.dat";
+	private final static String pathPac="data\\paciente\\paciente.dat";
 	private IGestorCrud gestorMed;
 	private IGestorCrud gestorSala;
 	private IGestorCrud gestorDoc;
 	private IGestorCrud gestorEnfer;
-	private IGestorCrud gestorPa;
+	private IGestorCrud gestorPac;
 	/**
 	 * @param gestorEnf 
 	 * @param gestorDoctor 
 	 * @param sc
 	 * @return 
 	 */
-	public VMenuPrincipal(IGestorCrud igMed, IGestorCrud igSala, IGestorCrud gestorDoctor, IGestorCrud gestorEnf, IGestorCrud gestorPac) {
+	public VMenuPrincipal(IGestorCrud igMed, IGestorCrud igSala, IGestorCrud gestorDoctor, IGestorCrud gestorEnf, IGestorCrud gestorPa) {
 		gestorMed=igMed;
 		gestorSala=igSala;
 		gestorDoc=gestorDoctor;
 		gestorEnfer=gestorEnf;
-		gestorPa=gestorPac;
+		gestorPac=gestorPa;
 		this.sc = new Scanner(System.in);
 	}
 	/**
@@ -66,35 +68,36 @@ public class VMenuPrincipal {
 		//Lista de enfermeros
 		List<Enfermero> listEnf=new ArrayList<Enfermero>();
 		//Lista de pacientes
-		List<Paciente> listPa=new ArrayList<Paciente>();
+		List<PacienteCon> listPac=new ArrayList<PacienteCon>();
 		//bucle para pedir datos
 		//Declaramos el gestor
 		GestorDoctor gestorD= new GestorDoctor(listDoc);
 		GestorEnf gestorE=new GestorEnf(listEnf);
+		GestorCrudPCon gestorP=new GestorCrudPCon(listPac);
 
 		int opcion=menuOpcion();
 		FileUtil fuMed=new FileUtil(this.pathMed);
 		FileUtil fuEnferm=new FileUtil(this.pathEnferm);
 		FileUtil fuDoc=new FileUtil(this.pathDoc);
 		FileUtil fuEnf=new FileUtil(this.pathEnf);
-		FileUtil fuPa=new FileUtil(this.pathPa);
+		FileUtil fuPac=new FileUtil(this.pathPac);
 		while(opcion!=0) {
 			if (opcion==1) {
 				//Declaramos el gestor
-				enfermedad.model.GestorCrudEnfermLeve gestor=new enfermedad.model.GestorCrudEnfermLeve(listEnferm);
+				GestorCrudEnfermLeve gestor=new GestorCrudEnfermLeve(listEnferm);
 				//Lanzar aplicacion
 				VMenuPrincipalEnfermLeve principal=new VMenuPrincipalEnfermLeve(gestor);
 				principal.menu();
 			}
 			else if (opcion==2) {
 				//Declaramos el gestor
-				enfermedad.model.GestorCrudEnfermGrave gestor=new enfermedad.model.GestorCrudEnfermGrave(listEnferm);
+				GestorCrudEnfermGrave gestor=new GestorCrudEnfermGrave(listEnferm);
 				//Lanzar aplicacion
 				VMenuPrincipalEnfermGrave principal=new VMenuPrincipalEnfermGrave(gestor);
 				principal.menu();
 			}else if (opcion==3) {
 				//Declaramos el gestor
-				medicamento.model.GestorCrudMed gestor=new medicamento.model.GestorCrudMed(listMed);
+				GestorCrudMed gestor=new GestorCrudMed(listMed);
 				//Lanzar aplicacion
 				VMenuPrincipalMed principal=new VMenuPrincipalMed(gestor);
 				principal.menu();
@@ -106,47 +109,41 @@ public class VMenuPrincipal {
 				principal.menu();
 			}else if (opcion==5) {
 				//Declaramos el gestor
-				GestorEnf gestor=new GestorEnf(listEnf);
+				gestorE=new GestorEnf(listEnf);
 				//Lanzar aplicacion
 				VMenuCrudEnf principal=new VMenuCrudEnf(gestorD, gestorE);
 				principal.menu();
 			}else if (opcion==6) {
 				//Declaramos el gestor
-				paciente.model.GestorCrudPSin gestor=new paciente.model.GestorCrudPSin(listPa);
+				gestorP=new GestorCrudPCon(listPac);
 				//Lanzar aplicacion
-				VMenuPrincipalPSin principal=new VMenuPrincipalPSin(gestor);
+				VMenuCrudPac principal=new VMenuCrudPac(gestorD, gestorP);
 				principal.menu();
 			}else if (opcion==7) {
-				//Declaramos el gestor
-				paciente.model.GestorCrudPCon gestor=new paciente.model.GestorCrudPCon(listPa);
-				//Lanzar aplicacion
-				VMenuPrincipalPCon principal=new VMenuPrincipalPCon(gestor);
-				principal.menu();
-			}else if (opcion==8) {
 				fuEnferm.save(listEnferm);
-			}else if (opcion==9) {
+			}else if (opcion==8) {
 				List<Enfermedad> listSinTmp=fuEnferm.readList();
 				listEnferm=(listSinTmp!=null)?listSinTmp:listEnferm;
-			}else if (opcion==10) {
+			}else if (opcion==9) {
 				fuMed.save(listMed);
-			}else if (opcion==11) {
+			}else if (opcion==10) {
 				List<Medicamento> listMedTmp=fuMed.readList();
 				listMed=(listMedTmp!=null)?listMedTmp:listMed;
-			}else if (opcion==12) {
+			}else if (opcion==11) {
 				fuDoc.save(listDoc);
-			}else if (opcion==13) {
+			}else if (opcion==12) {
 				List<Doctor> listDocTmp=fuDoc.readList();
 				listDoc=(listDocTmp!=null)?listDocTmp:listDoc;
-			}else if (opcion==14) {
+			}else if (opcion==13) {
 				fuEnf.save(listEnf);
-			}else if (opcion==15) {
+			}else if (opcion==14) {
 				List<Enfermero> listEnfTmp=fuEnf.readList();
 				listEnf=(listEnfTmp!=null)?listEnfTmp:listEnf;
+			}else if (opcion==15) {
+				fuPac.save(listPac);
 			}else if (opcion==16) {
-				fuPa.save(listPa);
-			}else if (opcion==17) {
-				List<Paciente> listPafTmp=fuPa.readList();
-				listPa=(listPafTmp!=null)?listPafTmp:listPa;
+				List<PacienteCon> listPafTmp=fuPac.readList();
+				listPac=(listPafTmp!=null)?listPafTmp:listPac;
 			}
 			opcion=menuOpcion();
 		}
@@ -164,18 +161,17 @@ public class VMenuPrincipal {
 			System.out.println("3. Ir al CRUD de medicamentos");
 			System.out.println("4. Ir al CRUD de doctores");
 			System.out.println("5. Ir al CRUD de enfermeros");
-			System.out.println("6. Ir al CRUD de pacientes sin cita");
-			System.out.println("7. Ir al CRUD de pacientes con cita");
-			System.out.println("8. Guardar enfermedad a fichero");
-			System.out.println("9. Cargar enfermedad de fichero");
-			System.out.println("10. Guardar medicamentos a fichero");
-			System.out.println("11. Cargar medicamentos de fichero");
-			System.out.println("12. Guardar doctores a fichero");
-			System.out.println("13. Cargar doctores de fichero");
-			System.out.println("14. Guardar enfermeros a fichero");
-			System.out.println("15. Cargar enfermeros de fichero");
-			System.out.println("16. Guardar pacientes a fichero");
-			System.out.println("17. Cargar pacientes de fichero");
+			System.out.println("6. Ir al CRUD de pacientes");
+			System.out.println("7. Guardar enfermedad a fichero");
+			System.out.println("8. Cargar enfermedad de fichero");
+			System.out.println("9. Guardar medicamentos a fichero");
+			System.out.println("10. Cargar medicamentos de fichero");
+			System.out.println("11. Guardar doctores a fichero");
+			System.out.println("12. Cargar doctores de fichero");
+			System.out.println("13. Guardar enfermeros a fichero");
+			System.out.println("14. Cargar enfermeros de fichero");
+			System.out.println("15. Guardar pacientes a fichero");
+			System.out.println("16. Cargar pacientes de fichero");
 			System.out.println("0. Para salir");
 			return sc.nextInt();
 		}catch (Exception e) {
@@ -195,7 +191,7 @@ public class VMenuPrincipal {
 		//Lista de enfermeros
 		List<Enfermero> listEnf=new ArrayList<Enfermero>();
 		//Lista de pacientes
-		List<Paciente> listPac=new ArrayList<Paciente>();
+		List<PacienteCon> listPac=new ArrayList<PacienteCon>();
 		//llamamos al menu con los gestores de cada tipo de dato
 		VMenuPrincipal principal=new VMenuPrincipal(
 				new GestorCrudMed(listMed),new GestorCrudFileEnfermGrave(listSin,VMenuPrincipal.pathEnferm),new GestorDoctor(listDoc),new GestorEnf(listEnf),new GestorCrudPCon(listPac));

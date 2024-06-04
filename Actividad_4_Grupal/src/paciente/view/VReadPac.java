@@ -3,19 +3,19 @@ package paciente.view;
 import java.util.List;
 import java.util.Scanner;
 
-import common.model.IGestorCRUD;
+import common.model.IGestorCrud;
 
 import paciente.model.Paciente;
 
 public class VReadPac {
 	private Scanner sc;
-	private IGestorCRUD gc;
+	private IGestorCrud gc;
 
 	/**
 	 * @param sc
 	 * @param gc
 	 */
-	public VReadPac(IGestorCRUD gc) {
+	public VReadPac(IGestorCrud gc) {
 		this.sc = new Scanner(System.in);
 		this.gc = gc;
 	}
@@ -35,4 +35,3 @@ public class VReadPac {
 		System.out.println(sRes);
 	}
 }
-

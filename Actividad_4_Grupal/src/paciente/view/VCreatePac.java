@@ -4,20 +4,20 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-import common.model.IGestorCRUD;
+import common.model.IGestorCrud;
 import doctor.model.Doctor;
 import paciente.model.Cita;
 import paciente.model.PacienteCon;
 
 public class VCreatePac {
 	private Scanner sc;
-	private IGestorCRUD gcPac;
-	private IGestorCRUD gcDoc;
+	private IGestorCrud gcPac;
+	private IGestorCrud gcDoc;
 
 	/**
 	 * @param gc
 	 */
-	public VCreatePac(IGestorCRUD gcDoc, IGestorCRUD gcPac) {
+	public VCreatePac(IGestorCrud gcDoc, IGestorCrud gcPac) {
 		this.sc = new Scanner(System.in);
 		this.gcPac = gcPac;
 		this.gcDoc = gcDoc;
@@ -61,7 +61,7 @@ public class VCreatePac {
 			System.out.println(doctores);
 			int pos = sc.nextInt();
 			PacienteCon p = new PacienteCon(nombre, edad, genero, dni, c);
-			doctores.get(pos).addPaciente(p);
+			doctores.get(pos).addPacientes(p);
 			gcPac.create(p);
 		} catch (Exception e) {
 			System.out.println("Error en create");

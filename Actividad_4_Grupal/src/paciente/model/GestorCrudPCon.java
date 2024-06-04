@@ -2,16 +2,16 @@ package paciente.model;
 
 import java.util.List;
 
-import common.model.IGestorCRUD;
+import common.model.IGestorCrud;
 
-public class GestorCrudPCon implements IGestorCRUD{
+public class GestorCrudPCon implements IGestorCrud{
 	
 	private List<PacienteCon> list;
 	/**
 	 * @param Element List de sintoma
 	 */
-	public GestorCrudPCon(List<PacienteCon> listPaciente) {
-		this.list = listPaciente;	
+	public GestorCrudPCon(List<PacienteCon> listPac) {
+		this.list = listPac;	
 	}
 	/**
 	 * agrega elementos
